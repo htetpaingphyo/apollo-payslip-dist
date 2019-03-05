@@ -1,0 +1,16 @@
+.container {
+  box-shadow: 1px 2px 6px #dddddd;
+  padding: 10px 0px;
+  width: 80%;
+  margin: auto;
+
+  mat-card {
+    width: 40%;
+    margin: 20px;
+  }
+
+  .message {
+    font-size: 0.7em;
+    color: rgba(255, 51, 0, 0.726);
+  }
+}

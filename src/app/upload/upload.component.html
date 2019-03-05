@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-card>
+      <h3>Upload Payslip</h3>
+      <hr/>
+      <input type="file" (change)="onFileSelected($event)"/>
+      <button mat-raised-button color="warn" (click)="onFileUpload()">Upload</button>
+      <p class="message">
+        {{message}}
+      </p>
+  </mat-card>
+</div>

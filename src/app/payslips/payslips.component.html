@@ -1,0 +1,77 @@
+<div class="mat-elevation-z8">
+  <!-- Checkbox Column -->
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="Select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Region">
+      <th mat-header-cell *matHeaderCellDef> Region </th>
+      <td mat-cell *matCellDef="let row"> {{row.Region}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Designation">
+      <th mat-header-cell *matHeaderCellDef> Designation </th>
+      <td mat-cell *matCellDef="let row"> {{row.Designation}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalWorkingDays">
+      <th mat-header-cell *matHeaderCellDef> TotalWorkingDays </th>
+      <td mat-cell *matCellDef="let row "> {{row.TotalWorkingDays}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ActualWorkingDays">
+      <th mat-header-cell *matHeaderCellDef> ActualWorkingDays </th>
+      <td mat-cell *matCellDef="let row "> {{row.ActualWorkingDays}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalBaseSalary">
+      <th mat-header-cell *matHeaderCellDef> TotalBaseSalary </th>
+      <td mat-cell *matCellDef="let row "> {{row.TotalBaseSalary}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalDeduction">
+      <th mat-header-cell *matHeaderCellDef> TotalDeduction </th>
+      <td mat-cell *matCellDef="let row "> {{row.TotalDeduction}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NetPay">
+      <th mat-header-cell *matHeaderCellDef> NetPay </th>
+      <td mat-cell *matCellDef="let row "> {{row.NetPay}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+  </table>
+
+  <div class="container">
+    <button mat-raised-button color="accent" (click)="sendMail()">Send Mail</button>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

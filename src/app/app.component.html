@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <button mat-button [matMenuTriggerFor]="menu">Payslips</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/upload']">Upload Payslips</button>
+    <button mat-menu-item [routerLink]="['/payslips']">Fetch Payslips</button>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
