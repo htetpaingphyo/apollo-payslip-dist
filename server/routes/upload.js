@@ -4,7 +4,7 @@ const xlsx = require("xlsx-to-json");
 const Payslip = require(__basedir + "/server/model/payslip-model");
 const api = express.Router();
 
-/** defining where to store uploaded file... */
+/** Defining where to store uploaded file... */
 var storage = multer.diskStorage({
   destination: function(req, file, callback) {
     //request, file, callback
@@ -51,10 +51,10 @@ api.post("/", function(req, res) {
     // converting excel to json...
     exceltojson = xlsx;
     try {
-      var result = 'Payslip uploaded successfully';
+      var result = "Payslip uploaded successfully";
       Payslip.remove({}, () => {
-        console.log('Cleaning database completed.');
-      })
+        console.log("Cleaning database completed.");
+      });
       exceltojson(
         {
           input: req.file.path,
@@ -62,25 +62,20 @@ api.post("/", function(req, res) {
           lowerCaseHeaders: true
         },
         function(error, payslips) {
-          if (error)
-          {
-            result = 'An error while uploading. Please try again!';
+          if (error) {
+            result = "An error while uploading. Please try again!";
             console.log(error);
-          }
-          else
-          {
-            for (var i in payslips)
-            {
+          } else {
+            for (var i in payslips) {
               const payslip = new Payslip(payslips[i]);
               payslip.save((error, slip) => {
-                if (error)
-                {
-                  result = 'An error while uploading. Please try again!';
+                if (error) {
+                  result = "An error while uploading. Please try again!";
                   console.log(error);
-                }
-                else
-                {
-                  console.log(`${payslip._id} is successfully saved to database!`);
+                } else {
+                  console.log(
+                    `${payslip._id} is successfully saved to database!`
+                  );
                 }
               });
             }

@@ -6,10 +6,10 @@ global.__basedir = __dirname;
 /**
  * Preprocessing modules
  */
-const express = require('express');
-const parser = require('body-parser');
-const path = require('path');
-const api = require('./server/routes/api');
+const express = require("express");
+const parser = require("body-parser");
+const path = require("path");
+const api = require("./server/routes/api");
 
 /**
  * Declaration
@@ -21,9 +21,9 @@ const port = 3000;
  */
 const app = express();
 app.use(parser.json());
-app.use(parser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'dist/')));
-app.use('/api', api);
+app.use(parser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "dist/")));
+app.use("/api", api);
 
 /** Allow cross origin requests */
 app.use(function(req, res, next) {
@@ -40,15 +40,15 @@ app.use(function(req, res, next) {
 /**
  * API routing
  */
-app.get('/', (req, res) => {
-res.sendFile(express.static(path.join(__dirname, 'dist/')));
-  res.writeHead(200, 'Content-Type: text/html');
-  res.end('<h3>Express server is running properly...</h3>');
+app.get("/", (req, res) => {
+  res.sendFile(express.static(path.join(__dirname, "dist/")));
+  res.writeHead(200, "Content-Type: text/html");
+  res.end("<h3>Express server is running properly...</h3>");
 });
 
 /**
  * Server starting...
  */
-app.listen(port, 'localhost', () => {
+app.listen(port, "localhost", () => {
   console.log(`Server is starting at port: ${port}`);
 });
