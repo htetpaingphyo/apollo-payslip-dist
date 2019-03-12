@@ -13,4 +13,14 @@
     font-size: 0.7em;
     color: rgba(255, 51, 0, 0.726);
   }
+
+  .radio-group {
+    padding: 3px 5px;
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .radio-button {
+    margin: 5px;
+  }
 }

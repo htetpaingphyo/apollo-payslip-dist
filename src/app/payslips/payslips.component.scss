@@ -2,6 +2,24 @@
   width: 80%;
   margin: auto;
 
+  .radio-group {
+    padding: 3px 5px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .clear {
+    padding: 7px 10px;
+
+    h5 {
+      color: orangered;
+    }
+  }
+
+  .radio-button {
+    margin: 5px;
+  }
+
   table {
     width: 100%;
   }
@@ -9,5 +27,14 @@
   .container {
     padding: 5px 12px;
     display: flex;
+  }
+
+  fieldset {
+    border: 1px solid #dfdfdf;
+  }
+
+  .form-group {
+    padding: 5px 3px;
+    margin: 5px 0px;
   }
 }

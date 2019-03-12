@@ -9,8 +9,12 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 export class UploadComponent implements OnInit {
   file: File = null;
   message: string;
-  // apiUrl = 'http://localhost:3000/api';
-  apiUrl = 'http://192.168.1.252:8080/api/';
+
+  employeeTypes: string[] = ['Local', 'Expat'];
+  employeeStatus: string;
+
+  apiUrl = 'http://localhost:3000/api';
+  // apiUrl = 'http://192.168.1.252:8080/api/';
 
   constructor(private http: HttpClient) {}
 
@@ -25,8 +29,16 @@ export class UploadComponent implements OnInit {
       this.message = 'Please choose a file to upload.';
       return;
     }
+
+    if (this.employeeStatus === null) {
+      this.message = 'Please select employee type before submit.';
+      return;
+    }
+
     const fd = new FormData();
+    fd.append('status', this.employeeStatus);
     fd.append('payslip', this.file, this.file.name);
+
     this.http
       .post(this.apiUrl + '/upload', fd, {
         reportProgress: true,

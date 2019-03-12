@@ -1,4 +1,4 @@
-export interface Payslip {
+export interface Local {
   EmpId: String;
   Payable: String;
   Name: String;

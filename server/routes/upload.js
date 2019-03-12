@@ -1,8 +1,14 @@
 const express = require("express");
 const multer = require("multer");
 const xlsx = require("xlsx-to-json");
-const Payslip = require(__basedir + "/server/model/payslip-model");
+const model = require(__basedir + "/server/model/payslip-model");
+const parser = require("body-parser");
+
 const api = express.Router();
+
+/** Use body parser for 'FormData' request */
+api.use(parser.json());
+api.use(parser.urlencoded({ extended: false }));
 
 /** Defining where to store uploaded file... */
 var storage = multer.diskStorage({
@@ -48,13 +54,25 @@ api.post("/", function(req, res) {
       return;
     }
 
+    // check if the employee is 'LOCAL' or 'EXPAT'?
+    var status = req.body["status"];
+
     // converting excel to json...
     exceltojson = xlsx;
     try {
+      // default message for reply client.
       var result = "Payslip uploaded successfully";
-      Payslip.remove({}, () => {
-        console.log("Cleaning database completed.");
-      });
+
+      // cleaning database records before inserting.
+      if (status == "Local") {
+        model.Local.remove({}, () => {
+          console.log("Cleaning database completed.");
+        });
+      } else {
+        model.Expat.remove({}, () => {
+          console.log("Cleaning database completed.");
+        });
+      }
       exceltojson(
         {
           input: req.file.path,
@@ -67,14 +85,19 @@ api.post("/", function(req, res) {
             console.log(error);
           } else {
             for (var i in payslips) {
-              const payslip = new Payslip(payslips[i]);
+              var payslip = null;
+              if (status == "Local") {
+                payslip = new model.Local(payslips[i]);
+              } else {
+                payslip = new model.Expat(payslips[i]);
+              }
               payslip.save((error, slip) => {
                 if (error) {
                   result = "An error while uploading. Please try again!";
                   console.log(error);
                 } else {
                   console.log(
-                    `${payslip._id} is successfully saved to database!`
+                    `id: ${payslip._id}, status: ${status} is successfully saved to database!`
                   );
                 }
               });

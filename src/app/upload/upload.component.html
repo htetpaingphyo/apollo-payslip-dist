@@ -1,11 +1,24 @@
 <div class="container">
   <mat-card>
-      <h3>Upload Payslip</h3>
-      <hr/>
-      <input type="file" (change)="onFileSelected($event)"/>
-      <button mat-raised-button color="warn" (click)="onFileUpload()">Upload</button>
-      <p class="message">
-        {{message}}
-      </p>
+    <h3>Upload Payslip</h3>
+    <hr />
+
+    <mat-radio-group class="radio-group" [(ngModel)]="employeeStatus">
+      <mat-radio-button class="radio-button" *ngFor="let emp of employeeTypes" [value]="emp">
+        {{ emp }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="form-group">
+        <input type="file" (change)="onFileSelected($event)" />
+        <button mat-raised-button color="warn" (click)="onFileUpload()">
+          Upload
+        </button>
+    </div>
+
+    <p class="message">
+      {{ message }}
+    </p>
+
   </mat-card>
 </div>
