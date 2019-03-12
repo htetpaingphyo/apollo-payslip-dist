@@ -17,8 +17,8 @@ export class PayslipsComponent implements OnInit {
   employeeTypes: string[] = ['Local', 'Expat'];
   employeeStatus: string;
 
-  serviceUrl = 'http://localhost:3000/api/sendmail';
-  // serviceUrl = 'http://192.168.1.252:8080/api/sendmail';
+  // serviceUrl = 'http://localhost:3000/api/sendmail';
+  serviceUrl = 'http://192.168.1.252:8080/api/sendmail';
 
   localDisplayColumns: string[] = [
     'Select',

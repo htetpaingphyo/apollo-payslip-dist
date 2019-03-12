@@ -8,8 +8,8 @@ import { Expat } from './expat.model';
   providedIn: 'root'
 })
 export class PayslipService {
-  private serviceUrl = 'http://localhost:3000/api/payslips';
-  // private serviceUrl = 'http://192.168.1.252:8080/api/payslips';
+  // private serviceUrl = 'http://localhost:3000/api/payslips';
+  private serviceUrl = 'http://192.168.1.252:8080/api/payslips';
 
   constructor(private http: HttpClient) {}
 
