@@ -184,8 +184,10 @@ function sendMail(recipient, message) {
 
   outlook.sendEmail({
     auth: {
-      user: "may.phyoshein@apollo-towers.com",
-      pass: "mps19891"
+      // user: "may.phyoshein@apollo-towers.com",
+      // pass: "mps19891"
+      user: "win.thida.hlaing@panasiatower.net",
+      pass: "Wth@989172"
     },
     from: "may.phyoshein@apollo-towers.com",
     to: recipient,
