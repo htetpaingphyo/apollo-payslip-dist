@@ -189,7 +189,7 @@ function sendMail(recipient, message) {
       user: "win.thida.hlaing@panasiatower.net",
       pass: "Wth@989172"
     },
-    from: "may.phyoshein@apollo-towers.com",
+    from: "win.thida.hlaing@panasiatower.net",
     to: recipient,
     subject: `Payslip Information for ${monthNames[d.getMonth()]}`,
     html: message
