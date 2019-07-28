@@ -17,8 +17,8 @@ export class PayslipsComponent implements OnInit {
   employeeTypes: string[] = ['Local', 'Expat'];
   employeeStatus: string;
 
-  // serviceUrl = 'http://localhost:3000/api/sendmail';
-  serviceUrl = 'http://192.168.1.12:8080/api/sendmail';
+  serviceUrl = 'http://localhost:3000/api/sendmail';
+  // serviceUrl = 'http://192.168.1.12:8080/api/sendmail';
 
   localDisplayColumns: string[] = [
     'Select',
@@ -78,7 +78,10 @@ export class PayslipsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.service.getLocalPayslips().subscribe(slip => {
+      this.dataSource = new MatTableDataSource<Local>(slip);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -101,11 +104,7 @@ export class PayslipsComponent implements OnInit {
   sendMail(status: string) {
     if (status === 'Local') {
       this.selection.selected.forEach(val => {
-        this.http
-          .post(this.serviceUrl, {
-            status: status,
-            email: val['Email']
-          })
+        this.http.post( this.serviceUrl, { status: status, email: val['Email'] } )
           .subscribe(
             data => {
               console.log('POST Request is successful ', data);
@@ -130,6 +129,7 @@ export class PayslipsComponent implements OnInit {
               console.log('Error', error);
             }
           );
+        console.log('Sending => ' + val['Email']);
       });
     }
   }

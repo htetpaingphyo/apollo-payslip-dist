@@ -13,8 +13,8 @@ export class UploadComponent implements OnInit {
   employeeTypes: string[] = ['Local', 'Expat'];
   employeeStatus: string;
 
-  // apiUrl = 'http://localhost:3000/api';
-  apiUrl = 'http://192.168.1.12:8080/api';
+  apiUrl = 'http://localhost:3000/api';
+  // apiUrl = 'http://192.168.1.12:8080/api';
 
   constructor(private http: HttpClient) {}
 
