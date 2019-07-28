@@ -34,6 +34,8 @@ app.use(function(req, res, next) {
     "Access-Control-Allow-Headers",
     "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
   );
+
+  req.setTimeout(0) // no timeout
   next();
 });
 

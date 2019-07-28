@@ -4,6 +4,7 @@ const payslip = require(__basedir + "/server/model/payslip-model");
 const api = express.Router();
 
 const email = [];
+// var count = 0;
 
 api.get("/", (req, res) => {
   console.log(`${req.originalUrl} works here!`);
@@ -13,11 +14,15 @@ api.post("/", (req, res) => {
   const status = req.body["status"];
   if (status == "Local") {
     // for (var i in req.body["email"]) { }
+    // console.log(req.body);
     recipient = req.body["email"];
     payslip.Local.findOne({ Email: recipient }, (error, slip) => {
       if (error) {
         console.log(error);
       } else {
+        res.status(200).send();
+        // console.log(`${count}: ${slip.Email}`);
+        // count++;
         sendMail(
           slip.Email,
           `
