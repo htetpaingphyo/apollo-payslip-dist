@@ -100,6 +100,7 @@ api.post("/", (req, res) => {
       if (error) {
         console.log(error);
       } else {
+        res.status(200).send();
         sendMail(
           slip.Email,
           `
