@@ -1,9 +1,6 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
-<<<<<<< HEAD
 const smtpPool = require("nodemailer-smtp-pool");
-=======
->>>>>>> 164286503fbf734e4593b465204b25c674890796
 const payslip = require(__basedir + "/server/model/payslip-model");
 const api = express.Router();
 
