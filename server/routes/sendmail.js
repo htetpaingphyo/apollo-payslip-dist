@@ -1,5 +1,5 @@
 const express = require("express");
-const outlook = require("nodejs-nodemailer-outlook");
+const nodemailer = require("nodemailer");
 const payslip = require(__basedir + "/server/model/payslip-model");
 const api = express.Router();
 
@@ -188,19 +188,29 @@ function sendMail(recipient, message) {
 
   const d = new Date();
 
+  var outlook = nodemailer.createTransport({
+      maxConnections: 3,
+      pool: true,
+      host: "smtp.office365.com",
+      port: 587,
+      secure: false,
+      auth: {
+        // user: "may.phyoshein@apollo-towers.com",
+        // pass: "mps19891"
+        user: "win.thida.hlaing@panasiatower.net",
+        pass: "Wth@989172"
+      }
+  });
+
   outlook.sendEmail({
-    auth: {
-      // user: "may.phyoshein@apollo-towers.com",
-      // pass: "mps19891"
-      user: "win.thida.hlaing@panasiatower.net",
-      pass: "Wth@989172"
-    },
     from: "win.thida.hlaing@panasiatower.net",
     to: recipient,
     subject: `Payslip Information for ${monthNames[d.getMonth()]}`,
-    html: message
+    html: message,
+    onError: (e) => console.log(e),
+    onSuccess: (i) => console.log(i)
   });
-  console.log(`Email successfully sent to: ${recipient}.`);
+  // console.log(`Email successfully sent to: ${recipient}.`);
 }
 
 module.exports = api;
