@@ -198,8 +198,6 @@ function sendMail(recipient, message) {
       // pass: "mps19891"
       user: "win.thida.hlaing@panasiatower.net",
       pass: "Wth@989172"
-      // user: "htet.paing.phyo@panasiatower.net",
-      // pass: "!MM0rt@l"
     },
     // use up to 5 parallel connections
     maxConnections: 5,
