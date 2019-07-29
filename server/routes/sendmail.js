@@ -1,5 +1,6 @@
 const express = require("express");
-const outlook = require("nodejs-nodemailer-outlook");
+const nodemailer = require("nodemailer");
+const smtpPool = require("nodemailer-smtp-pool");
 const payslip = require(__basedir + "/server/model/payslip-model");
 const api = express.Router();
 
@@ -187,19 +188,40 @@ function sendMail(recipient, message) {
 
   const d = new Date();
 
-  outlook.sendEmail({
+  let transporter = nodemailer.createTransport(smtpPool({
+    host: "smtp.office365.com",
+    port: 587,
+    secure: false,
     auth: {
       // user: "may.phyoshein@apollo-towers.com",
       // pass: "mps19891"
       user: "win.thida.hlaing@panasiatower.net",
       pass: "Wth@989172"
+      // user: "htet.paing.phyo@panasiatower.net",
+      // pass: "!MM0rt@l"
     },
-    from: "may.phyoshein@apollo-towers.com",
+    // use up to 5 parallel connections
+    maxConnections: 5,
+    // do not send more than 10 messages per connection
+    maxMessages: 10,
+    // no not send more than 5 messages in a second
+    rateLimit: 5
+  }));
+
+  let mailOptions = {
+    from: "htet.paing.phyo@panasiatower.net",
     to: recipient,
     subject: `Payslip Information for ${monthNames[d.getMonth()]}`,
     html: message
+  };
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log(`Email successfully send to: ${recipient}.`);
   });
-  console.log(`Email successfully sent to: ${recipient}.`);
+
 }
 
 module.exports = api;
