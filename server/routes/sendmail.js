@@ -189,25 +189,27 @@ function sendMail(recipient, message) {
 
   const d = new Date();
 
-  let transporter = nodemailer.createTransport(smtpPool({
+  let transporter = nodemailer.createTransport({
+    pool: true,
+    maxConnections: 3,
+    maxMessages: 5,
+    rateDelta: 1000,
+    rateLimit: 3,
     host: "smtp.office365.com",
     port: 587,
     secure: false,
     auth: {
       // user: "may.phyoshein@apollo-towers.com",
       // pass: "mps19891"
-      user: "win.thida.hlaing@panasiatower.net",
-      pass: "Wth@989172"
-    },
-    // use up to 5 parallel connections
-    maxConnections: 5,
-    // do not send more than 10 messages per connection
-    maxMessages: 10,
-    // no not send more than 5 messages in a second
-    rateLimit: 5
-  }));
+      // user: "win.thida.hlaing@panasiatower.net",
+      // pass: "Wth@989172"
+      user: "htet.paing.phyo@panasiatower.net",
+      pass: "!MM0rt@l"
+    }
+  });
 
   let mailOptions = {
+    // from: "win.thida.hlaing@panasiatower.net",
     from: "htet.paing.phyo@panasiatower.net",
     to: recipient,
     subject: `Payslip Information for ${monthNames[d.getMonth()]}`,
@@ -217,8 +219,9 @@ function sendMail(recipient, message) {
   transporter.sendMail(mailOptions, (err, info) => {
     if(err) {
       console.log(err);
+    } else {
+      console.log(`Email successfully send to: ${recipient}.`);
     }
-    console.log(`Email successfully send to: ${recipient}.`);
   });
 
 }
